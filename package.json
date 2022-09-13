@@ -1,21 +1,35 @@
 {
-  "name": "test-test",
+  "name": "nftvolunteer",
   "version": "0.1.0",
-  "private": true,
+  "private": "false",
+  "homepage": "",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
+    "@craco/craco": "^6.4.3",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "axios": "^0.27.2",
+    "bn.js": "^5.2.0",
+    "borsh": "^0.7.0",
+    "classnames": "^2.3.1",
+    "crypto-js": "^4.1.1",
+    "gh-pages": "^3.2.3",
+    "near-api-js": "^0.45.1",
+    "query-string": "^7.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "react-loader-spinner": "^4.0.0",
+    "react-router-dom": "6",
+    "react-scripts": "4.0.3",
+    "regenerator-runtime": "^0.13.9",
+    "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "BROWSER=none craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject",
+    "deploy:pages": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
