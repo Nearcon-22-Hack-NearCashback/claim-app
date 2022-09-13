@@ -24,12 +24,14 @@ function useQuery() {
 
 function ClaimPage() {
     const [loading, setLoading] = useState(false)
+    const [amount, setAmount] = useState(0)
     const query = useQuery();
     const key = query.get("key");
     const id = query.get("id");
 
     useEffect(() => {
         getOneTimeKey()
+        getAmount()
     }, [])
 
     const getOneTimeKey = async () => {
@@ -39,8 +41,18 @@ function ClaimPage() {
         const keyPair = KeyPair.fromString(response);
         await window.nearConnection.connection.signer.keyStore.setKey(network, "cashback.nearprotocolua.near", keyPair);
 
-
         window.account = await window.nearConnection.account("cashback.nearprotocolua.near", window.nearConnection.connection.signer.keyStore);
+        setLoading(false)
+    }
+
+    const getAmount = async () => {
+        setLoading(true)
+        const amount = await window.contract.get_cashback_amount({
+            id: +id
+        })
+
+        setAmount(nearAPI.utils.format.formatNearAmount(amount, 4))
+
         setLoading(false)
     }
 
@@ -76,15 +88,30 @@ function ClaimPage() {
     return (
         <div className="page-wrapper">
             <div className={loading ? "card cringe" : "card"}>
-                <h1>NEAR</h1>
-                <div className="middle-text">Thank You</div>
-                <button disabled={loading} onClick={claim} className="claim-button">Claim your cashback</button>
+                {/*<img*/}
+                {/*    style={{ height: '100%', width: '100%'}}*/}
+                {/*    src="../../assets/logo-white.svg"*/}
+                {/*    alt="near-image"*/}
+                {/*/>*/}
+                <h1 className="ash-1">Cashback</h1>
+                <h2 className="ash-2">{ amount }Ⓝ <br/> Thank You</h2>
+                {/*<div className="middle-text"></div>*/}
+                <button disabled={loading} onClick={claim} className="button-35 claim-button">Claim</button>
             </div>
             {
                 loading && (
                     <div className="loader-4 center"><span></span></div>
                 )
             }
+            <div className='light x1'></div>
+            <div className='light x2'></div>
+            <div className='light x3'></div>
+            <div className='light x4'></div>
+            <div className='light x5'></div>
+            <div className='light x6'></div>
+            <div className='light x7'></div>
+            <div className='light x8'></div>
+            <div className='light x9'></div>
         </div>
     );
 }

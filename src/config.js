@@ -1,6 +1,7 @@
 const CONTRACT_NAME = process.env.CONTRACT_NAME || 'cashback.nearprotocolua.near'
 
 function getConfig(env) {
+  console.log('env', env);
   switch (env) {
 
   case 'production':
