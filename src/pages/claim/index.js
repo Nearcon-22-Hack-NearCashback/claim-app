@@ -5,7 +5,8 @@ import * as nearAPI from "near-api-js";
 import './index.css';
 
 const { KeyPair } = nearAPI;
-const walletLink = "https://app.mynearwallet.com/linkdrop/near/"
+const walletLink = "https://wallet.near.org/linkdrop/near/";
+// const walletLink = "https://app.mynearwallet.com/linkdrop/near/"
 
 const network = 'mainnet'
 
