@@ -4,7 +4,8 @@ import './global.css'
 import {initContract} from "./utils/utils";
 import {
     Routes,
-    Route, BrowserRouter,
+    Route,
+    BrowserRouter,
 } from "react-router-dom";
 import ClaimPage from "./pages/claim";
 import { createRoot } from 'react-dom/client';
@@ -16,7 +17,7 @@ const root = createRoot(container);
 window.nearInitPromise = initContract()
   .then(() => {
     root.render(
-        <BrowserRouter>
+        <BrowserRouter basename="/">
             <Routes>
                 <Route path="/claim" element={<ClaimPage />} />
                 <Route path="/" element={<GamePage />} />
