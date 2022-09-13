@@ -18,7 +18,7 @@
     max-width: 240px;
     max-height: 600px;
     background-color: #3CA6A6;
-    /*border-radius: 15px;*/
+    border-radius: 15px;
     z-index: 5;
 }
 
@@ -39,17 +39,13 @@
 
 .claim-button {
     /*border-color: white;*/
-    margin: 0 0 20px 0;
+    margin: 0 0 40px 0;
     max-width: 200px;
 }
 
 .claim-button:disabled {
     background-color: dimgrey;
     color: white;
-}
-
-.login-button {
-    margin: 0 0 20px 0;
 }
 
 .middle-text {
@@ -239,7 +235,7 @@
     font-weight: 700;
     justify-content: center;
     line-height: 1;
-    margin: 0 0 20px 0;
+    margin: 0 0 50px 0;
     outline: none;
     padding: 1rem 1.2rem;
     text-align: center;
@@ -259,7 +255,7 @@
 }
 
 .ash-1 {
-    padding-top: 120px;
+    padding-top: 50px;
     margin-bottom: 0;
 }
 
