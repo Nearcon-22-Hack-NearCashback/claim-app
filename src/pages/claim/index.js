@@ -7,7 +7,7 @@ import './index.css';
 const { KeyPair } = nearAPI;
 const walletLink = "https://app.mynearwallet.com/linkdrop/near/"
 
-const network = 'testnet'
+const network = 'mainnet'
 
 const numberToUint8Array = (x) => {
     console.log('x', x);
@@ -36,10 +36,10 @@ function ClaimPage() {
         const response = await window.contract.get_claiming_key()
 
         const keyPair = KeyPair.fromString(response);
-        await window.nearConnection.connection.signer.keyStore.setKey(network, "cashback.helpua.testnet", keyPair);
+        await window.nearConnection.connection.signer.keyStore.setKey(network, "cashback.nearprotocolua.near", keyPair);
 
 
-        window.account = await window.nearConnection.account("cashback.helpua.testnet", window.nearConnection.connection.signer.keyStore);
+        window.account = await window.nearConnection.account("cashback.nearprotocolua.near", window.nearConnection.connection.signer.keyStore);
         setLoading(false)
     }
 

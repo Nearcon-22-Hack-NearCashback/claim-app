@@ -1,7 +1,7 @@
 import { Account, connect, Contract, keyStores, WalletConnection } from 'near-api-js'
 import getConfig from "../config";
 
-const nearConfig = getConfig(process.env.NODE_ENV || 'development')
+const nearConfig = getConfig(process.env.NODE_ENV || 'mainnet')
 
 // Initialize contract & set global variables
 export async function initContract() {
@@ -14,7 +14,7 @@ export async function initContract() {
 
   // Getting the Account ID. If still unauthorized, it's just empty string
   window.accountId = window.walletConnection.getAccountId()
-  window.account = await new Account(window.nearConnection.connection, "cashback.helpua.testnet")
+  window.account = await new Account(window.nearConnection.connection, "cashback.nearprotocolua.near")
 
   // Initializing our contract APIs by contract name and configuration
   window.contract = await new Contract(window.account || window.account, nearConfig.contractName, {

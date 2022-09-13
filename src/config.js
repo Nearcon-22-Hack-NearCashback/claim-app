@@ -1,4 +1,4 @@
-const CONTRACT_NAME = process.env.CONTRACT_NAME || 'cashback.helpua.testnet'
+const CONTRACT_NAME = process.env.CONTRACT_NAME || 'cashback.nearprotocolua.near'
 
 function getConfig(env) {
   switch (env) {
@@ -6,12 +6,13 @@ function getConfig(env) {
   case 'production':
   case 'mainnet':
     return {
-      networkId: 'testnet',
-      nodeUrl: 'https://rpc.testnet.near.org',
+      networkId: "mainnet",
+      nodeUrl: "https://rpc.mainnet.near.org",
+      walletUrl: "https://wallet.near.org",
+      helperUrl: "https://helper.mainnet.near.org",
+      headers: {},
       contractName: CONTRACT_NAME,
-      walletUrl: 'https://wallet.testnet.near.org',
-      helperUrl: 'https://helper.testnet.near.org',
-      explorerUrl: 'https://explorer.testnet.near.org',
+      explorerUrl: 'https://explorer.mainnet.near.org',
     }
   case 'development':
   case 'testnet':
