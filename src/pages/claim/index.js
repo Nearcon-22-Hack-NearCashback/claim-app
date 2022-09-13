@@ -1,35 +1,46 @@
-import React, { useEffect } from 'react';
-import './index.css';
-import { useHistory, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import BN from "bn.js";
+import { useLocation } from "react-router-dom";
 import * as nearAPI from "near-api-js";
+import './index.css';
+
+const { KeyPair } = nearAPI;
 const walletLink = "https://app.mynearwallet.com/linkdrop/near/"
-const { keyStores, KeyPair } = nearAPI;
 
 const network = 'testnet'
 
+const numberToUint8Array = (x) => {
+    console.log('x', x);
+    return Buffer.from(x.toArray("be", 8));
+};
+
+
 function useQuery() {
     const location = useLocation();
-
-    console.log('search', location);
 
     return React.useMemo(() => new URLSearchParams(location.search), [location.search]);
 }
 
 function ClaimPage() {
+    const [loading, setLoading] = useState(false)
     const query = useQuery();
     const key = query.get("key");
     const id = query.get("id");
-    const myKeyStore = new keyStores.InMemoryKeyStore();
 
-    // useEffect(() => {
-    //     getOneTimeKey()
-    // }, [])
+    useEffect(() => {
+        getOneTimeKey()
+    }, [])
 
     const getOneTimeKey = async () => {
-        const claimKey = await window.contract.get_claiming_key()
+        setLoading(true)
+        const response = await window.contract.get_claiming_key()
 
-        const keyPair = KeyPair.fromString(claimKey);
-        await myKeyStore.setKey(network, "nearcashback.testnet", keyPair);
+        const keyPair = KeyPair.fromString(response);
+        await window.nearConnection.connection.signer.keyStore.setKey(network, "cashback.helpua.testnet", keyPair);
+
+
+        window.account = await window.nearConnection.account("cashback.helpua.testnet", window.nearConnection.connection.signer.keyStore);
+        setLoading(false)
     }
 
     const getLinkdrop = () => {
@@ -37,26 +48,42 @@ function ClaimPage() {
     }
 
     const claim = async () => {
-        const keyPair = await myKeyStore.getKey(network, "nearcashback.testnet");
-        const msg = Buffer.from(id);
+        setLoading(true)
+        const { utils } = nearAPI;
 
-        const { signature } = keyPair.sign(msg);
+        const keyPair = utils.KeyPairEd25519.fromString(
+            key
+        );
+        const cashbackId = +id;
+
+        const buffer = numberToUint8Array(new BN(cashbackId));
+        console.log('buffer', buffer);
+
+        const signed = keyPair.sign(buffer);
+
+        const signature = signed.signature;
 
         await window.contract.claim({
-            signature,
-            id
+            signature: Array.from(signature),
+            id: +cashbackId
         })
 
         window.location.replace(getLinkdrop())
+        setLoading(false)
     }
 
     return (
         <div className="page-wrapper">
-            <div className="card">
+            <div className={loading ? "card cringe" : "card"}>
                 <h1>NEAR</h1>
                 <div className="middle-text">Thank You</div>
-                <button onClick={claim} className="claim-button">Claim your cashback</button>
+                <button disabled={loading} onClick={claim} className="claim-button">Claim your cashback</button>
             </div>
+            {
+                loading && (
+                    <div className="loader-4 center"><span></span></div>
+                )
+            }
         </div>
     );
 }
