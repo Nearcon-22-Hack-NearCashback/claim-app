@@ -2,6 +2,8 @@
 
 ## About frontend
 
+Deployed frontend: https://app.nearcashback.com/claim
+
 Simple frontend application with 1 page /claim that allows you to claim your cashback that you received on the receipt in QR-code way.
 Here user don't need to login because we create functional key for our contract to get claim the money.
 So the flow:
