@@ -31,3 +31,8 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+
+Thanks for watchin, subscribes on us:
+https://twitter.com/nearuaguild
+https://t.me/nearprotocolua
+https://t.me/nearprotocoluachannel
